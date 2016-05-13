@@ -83,8 +83,7 @@ Setup Public key
 Edit /Plugins/ InAppBillingAndroid /demo/ IABUIManager.cs
 
 // Setup Public key 
-var key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkok4oMhn4uuMJvX1557oSdMrNxmdD1aFnysGW9pGAcM+ieKmYgNmvU1iQXn2NiY1cuJ0syxA9uTvYDam71FfHHBdp2DHt9CDYXzZE+rb5axI+o9qU8dn/J/x4X0778JDlCszsikEX+U3Eqfq7J6fAMFzDv4KimeuXPX5xRszEFcqpoYu1DWcdbytmqz1MeN972of0BliNb4IknGcum1Lh0qG3UhQVDCq07cOIPdC2tqAGKXgdMqu89NZUmsqiuXZ55tOqoUptHI8r9rQ+Xi9gmN9uivC0FXvyE95l8s7lxU2G43bqNarZMWUI2ZaDqjjTSdacFfeTYNfybHs7tS0YwIDAQAB
-";
+var key = "Your Public Key on Google Play";
 
 GoogleIAB.init( key );
 ```
