@@ -3,7 +3,8 @@
 
 # How to integrate it with Unity Prime31 Plugin ?
 
-  Import Prime31 StoreKit and in-App-Billing into Unity.
+  Import Prime31 plugins
+    StoreKit for Apple Store and In-App-Billing for Google Play into Unity.
   
 # How to setup In-App-Purchase for IOS ? 
 
@@ -60,7 +61,78 @@ void purchaseSuccessfulEvent( StoreKitTransaction transaction )
    }
 
 ```
-  
-
  
+# How to setup In-App-Billing for Android ? 
+
+There are two steps for this.
+  
+  - Setup App Public Key
+  - Setup Item`s Product Id
+  - Setup Payment Success Event to Get Receipt 
+
+## Setup App Public Key
+
+Open a demo scene in folder 
+```
+/Plugins/ InAppBillingAndroid /demo/IABTestScene.unity
+```
+
+Setup Public key 
+
+```
+Edit /Plugins/ InAppBillingAndroid /demo/ IABUIManager.cs
+
+// Setup Public key 
+var key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkok4oMhn4uuMJvX1557oSdMrNxmdD1aFnysGW9pGAcM+ieKmYgNmvU1iQXn2NiY1cuJ0syxA9uTvYDam71FfHHBdp2DHt9CDYXzZE+rb5axI+o9qU8dn/J/x4X0778JDlCszsikEX+U3Eqfq7J6fAMFzDv4KimeuXPX5xRszEFcqpoYu1DWcdbytmqz1MeN972of0BliNb4IknGcum1Lh0qG3UhQVDCq07cOIPdC2tqAGKXgdMqu89NZUmsqiuXZ55tOqoUptHI8r9rQ+Xi9gmN9uivC0FXvyE95l8s7lxU2G43bqNarZMWUI2ZaDqjjTSdacFfeTYNfybHs7tS0YwIDAQAB
+";
+
+GoogleIAB.init( key );
+```
+ 
+# Setup Item`s Product Id
+```
+Edit /Plugins/ InAppBillingAndroid /demo/ IABUIManager.cs
+
+// Setup Product ID 
+private string[] skus = new string[] 
+{
+	"XXXXXX"  //  your Product Id here 
+};
+
+GoogleIAB.queryInventory( skus );
+```
+
+# Setup Payment Success Event to Get Receipt 
+
+```
+Edit /Plugins/ InAppBillingAndroid /demo/ GoogleIABEventListener.cs
+
+
+void purchaseCompleteAwaitingVerificationEvent( string purchaseData, string signature )
+{
+	Debug.Log( "purchaseCompleteAwaitingVerificationEvent. purchaseData: " + purchaseData + ", signature: " + signature );
+	Prime31.Utils.logObject (purchaseData);
+	Prime31.Utils.logObject (signature);
+
+	// Goole receipt 
+	string receipt = purchaseData;
+
+	// Initil POST form
+	WWWForm form = new WWWForm ();
+	form.AddField ("key", "1234");
+	form.AddField ("os", "android");
+	form.AddField ("en", "prod");
+	form.AddField ("receipt", receipt);
+ form.AddField ( "sing", signature);
+
+	// Server URL
+	string url = "http://your server ip/veryPayment.php";
+	// Process respond
+	StartCoroutine (this.DoWWW (new WWW (url, form), (www) => 
+	{
+		Debug.Log("-------- Callback Success: " + www.text);
+	}));
+}
+```
+
 
