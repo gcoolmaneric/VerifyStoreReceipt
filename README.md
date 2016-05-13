@@ -1,7 +1,7 @@
 # VerifyStoreReceipt
  This is a simple PHP to validate Receipt for Apple and Google. 
 
-# How to integrate it with Unity Prime31 Plugin ?
+# Get Started
 
   Import Prime31 plugins
     StoreKit for Apple Store and In-App-Billing for Google Play into Unity.
@@ -59,7 +59,19 @@ void purchaseSuccessfulEvent( StoreKitTransaction transaction )
            Debug.Log("-------- Callback Success: " + www.text);
        }));
    }
+   
+   private delegate void WWWCallback (WWW www);		
+   private IEnumerator DoWWW (WWW www, WWWCallback callback) {
 
+		yield return www;
+
+		bool error = false;			
+		if (!string.IsNullOrEmpty (www.error) || string.IsNullOrEmpty (www.text)) {
+				error = true;			
+		}
+		if (!error && callback != null)
+			callback (www);
+    }
 ```
  
 # How to setup In-App-Billing for Android ? 
@@ -132,6 +144,18 @@ void purchaseCompleteAwaitingVerificationEvent( string purchaseData, string sign
 		Debug.Log("-------- Callback Success: " + www.text);
 	}));
 }
+  private delegate void WWWCallback (WWW www);		
+   private IEnumerator DoWWW (WWW www, WWWCallback callback) {
+
+		yield return www;
+
+		bool error = false;			
+		if (!string.IsNullOrEmpty (www.error) || string.IsNullOrEmpty (www.text)) {
+				error = true;			
+		}
+		if (!error && callback != null)
+			callback (www);
+    }
 ```
 
 
