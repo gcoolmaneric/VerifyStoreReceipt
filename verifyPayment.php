@@ -25,7 +25,7 @@
 		))
 
 		// Google Receipt 
-		receipt: {"orderId":"GPA.1391-9806-9510-85261","packageName":"com.sixwaves.iabtest","productId":"com.sixwaves.iab.cash.20","
+		receipt: {"orderId":"GPA.1391-9806-9510-85261","packageName":"com.weishihhsun.iabtest","productId":"com.weishihhsun.iab.cash.20","
 		purchaseTime":1461665313490,"purchaseState":0,"
 		purchaseToken":"mobdheofeamcpaddlcnfnhah.AO-J1Ow1ysahE5-jeqtDUlGxmxa2Se8tFJ2RNnkkWwEUew7OkOlfMBq8TSlcZOVdygzi-V0JujA2fKCAfWzTfQxdde640808zcbo-Ldj9gTOSz91wExfpne2rpNv7zb3I1PevSsy74U7"}
 
